@@ -1,6 +1,8 @@
 ;debug menu added by Rena's HACK_NEW_DEBUG_MENU option.
 ;sorry, this menu isn't in the original game.
 
+PUSHS
+SECTION "DebugMenu",ROMX
 DEBUG_MENU_NUM_OPTIONS EQU 8
 HackNewDebugMenu_Init:: ;init at power-on
 	push af
@@ -436,6 +438,7 @@ HackNewDebugMenu:: ;show the menu
 	dw .funcGiveMoney
 	dw .funcOpenPC
 	dw .funcShowTextbox
+	;dw .funcPlaySound
 
 	
 	;Item text
@@ -457,8 +460,9 @@ HackNewDebugMenu:: ;show the menu
 	db "Repel   @"
 	db "Strength@"
 	db "Flash   @"
-	
-	
+
 ;other interesting functions/thoughts:
 ;give/edit badges (W_OBTAINEDBADGES)
 ;edit W_MISSABLEOBJECTLIST, W_GAMEPROGRESSFLAGS
+
+POPS
