@@ -475,28 +475,28 @@ IF HACK_LOW_HEALTH_ALARM == 2
 	jr z, .disableAlarm
 ENDC
 	
-	ld a, $1e ;keep this tone for 30 frames.
+	ld a, 30 ;keep this tone for 30 frames.
 	jr .asm_21395 ;reset the timer.
 
-.asm_21383:
-	cp $14
+.asm_21383
+	cp 20
 	jr nz, .asm_2138a ;if timer == 20,
 	call .playToneLo  ;actually set the sound registers.
 
-.asm_2138a:
+.asm_2138a
 	ld a, $86
 	ld [wc02a], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
 
-.asm_21395:
+.asm_21395
 	; reset the timer and enable flag.
 	set 7, a
 	ld [wLowHealthAlarm], a
 	ret
 
-.disableAlarm:
+.disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
 	ld [wc02a], a  ;re-enable sound channel?
@@ -504,25 +504,25 @@ IF HACK_LOW_HEALTH_ALARM == 2
 	dec a
 	ld [wLowHealthAlarmCount],a ;prevent alarm turning back on
 ENDC
-	ld de, .toneDataSilence ; $53c4
+	ld de, .toneDataSilence
 	jr .playTone
 
 ;update the sound registers to change the frequency.
 ;the tone set here stays until we change it.
-.playToneHi: ; 213a7 (8:53a7)
-	ld de, .toneDataHi ; $53bc
+.playToneHi
+	ld de, .toneDataHi
 	jr .playTone
 
-.playToneLo: ; 213ac (8:53ac)
-	ld de, .toneDataLo ; $53c0
+.playToneLo
+	ld de, .toneDataLo
 
 ;update sound channel 1 to play the alarm, overriding all other sounds.
-.playTone: ; 213af (8:53af)
+.playTone
 	ld hl, rNR10 ;channel 1 sound register
 	ld c, $5
 	xor a
 
-.copyLoop:
+.copyLoop
 	ld [hli], a
 	ld a, [de]
 	inc de
@@ -533,14 +533,14 @@ ENDC
 ;bytes to write to sound channel 1 registers for health alarm.
 ;starting at FF11 (FF10 is always zeroed), so these bytes are:
 ;length, envelope, freq lo, freq hi
-.toneDataHi: ; 213bc (8:53bc)
+.toneDataHi
 	db $A0,$E2,$50,$87
 
-.toneDataLo: ; 213c0 (8:53c0)
+.toneDataLo
 	db $B0,$E2,$EE,$86
 
 ;written to stop the alarm
-.toneDataSilence: ; 213c4 (8:53c4)
+.toneDataSilence
 	db $00,$00,$00,$80
 
 
