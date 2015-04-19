@@ -3162,7 +3162,7 @@ ENDC
 	;print move type
 	call GetCurrentMove
 	hlCoord 1, 9
-	predef Func_27d98
+	predef PrintMoveType
 	
 	;place a "-" for the move power
 	hlCoord 7, 10
@@ -9042,7 +9042,7 @@ HackShowChooseMonMenu::
 	
 .monSelected:
 	ld a, $c ; switch/stats/cancel menu
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wTopMenuItemY
 	ld a, $c

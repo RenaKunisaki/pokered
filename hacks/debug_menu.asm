@@ -362,7 +362,7 @@ HackNewDebugMenu:: ;show the menu
 	
 .useRepel:
 	ld a,255
-	ld [wd0db],a
+	ld [wRepelRemainingSteps],a
 	jp .menuInit
 
 .useStrength:
@@ -410,7 +410,7 @@ HackNewDebugMenu:: ;show the menu
 	
 .funcShowTextbox:
 	ld a,[wHackDebugMenuWhichSound]
-	ld [wd125],a
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call HandleMenuInput
 	jp CloseStartMenu

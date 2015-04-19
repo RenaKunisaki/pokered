@@ -1170,7 +1170,7 @@ INCLUDE "engine/overworld/cable_club_npc.asm"
 
 ; function to draw various text boxes
 ; INPUT:
-; [wd125] = text box ID:
+; [wTextBoxID] = text box ID:
 ; 00: Invalid?
 ; 01: Standard dialogue box
 ; 02: ??? just freezes?

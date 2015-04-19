@@ -125,7 +125,7 @@ hackDisplayText:
 hackOpenTextBox:
 	xor a
 	ld [wListMenuID],a
-	ld hl,wcfc4 ;have the map sprites reloaded after we're done.
+	ld hl,wFontLoaded ;have the map sprites reloaded after we're done.
 	set 0,[hl]
 	call hackForceNPCsStandStill
 	call UpdateSprites
@@ -150,7 +150,7 @@ hackCloseTextBox:
 	ld a,$90
 	ld [hWY],a ; move the window off the screen
 	callba InitMapSprites
-	ld hl,wcfc4
+	ld hl,wFontLoaded
 	res 0,[hl]
 	call LoadPlayerSpriteGraphics
 	call LoadCurrentMapView
