@@ -52,6 +52,7 @@ hackInteractWaterTile:
 	call PrintText
 	call WaitForTextScrollButtonPress
 	
+IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld a,[W_OBTAINEDBADGES]
 	bit 4,a
 	jr z, .done ;player doesn't have badge needed to surf.
@@ -59,6 +60,7 @@ hackInteractWaterTile:
 	ld b,SURF
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Surf.
+ENDC
 	
 	;ask if we want to surf.
 	ld hl, hackWantSurfText
@@ -85,6 +87,7 @@ hackInteractCutBush:
 	call PrintText
 	call WaitForTextScrollButtonPress
 	
+IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld a,[W_OBTAINEDBADGES]
 	bit 1,a
 	jr z, .done ;player doesn't have badge needed to cut.
@@ -92,6 +95,7 @@ hackInteractCutBush:
 	ld b,CUT
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Cut.
+ENDC
 	
 	;ask if we want to cut.
 	ld hl, hackWantCutText
@@ -240,6 +244,7 @@ hackUseStrengthOverworld::
 	call PrintText
 	call WaitForTextScrollButtonPress
 	
+IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld a,[W_OBTAINEDBADGES]
 	bit 3,a
 	jr z, .done ;player doesn't have badge needed to use Strength.
@@ -247,6 +252,7 @@ hackUseStrengthOverworld::
 	ld b,STRENGTH
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Strength.
+ENDC
 	
 	;ask if we want to use it.
 	ld hl, hackWantStrengthText

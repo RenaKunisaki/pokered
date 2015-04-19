@@ -73,6 +73,8 @@ HACK_TEXT_NO_DELAY EQU 0
 ;allow to use HMs from the overworld by "talking" to bushes, water, rocks etc.
 HACK_USE_HM_FROM_OVERWORLD EQU 1
 
+;allow to use HMs from the overworld without HMs or badges
+HACK_USE_HM_FROM_OVERWORLD_DEBUG EQU 1
 
 ; Enable the original debug mode (bit 1 of wd732)
 ; This activates the following functions in the existing code:
