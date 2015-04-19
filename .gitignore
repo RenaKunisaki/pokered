@@ -14,6 +14,10 @@ src/
 
 # rgbds extras
 *.sym
+# there are some .map files in the actual source as well,
+# but they're not related to these.
+pokered.map
+pokeblue.map
 
 # converted image data
 *.2bpp
