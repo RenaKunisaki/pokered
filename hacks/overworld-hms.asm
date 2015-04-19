@@ -60,6 +60,11 @@ IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld b,SURF
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Surf.
+ELSE
+	ld a,"?" ;clear the string buffer to avoid printing garbage.
+	ld [wcd6d],a
+	ld a,$50
+	ld [wcd6d+1],a
 ENDC
 	
 	;ask if we want to surf.
@@ -95,6 +100,11 @@ IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld b,CUT
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Cut.
+ELSE
+	ld a,"?" ;clear the string buffer to avoid printing garbage.
+	ld [wcd6d],a
+	ld a,$50
+	ld [wcd6d+1],a
 ENDC
 	
 	;ask if we want to cut.
@@ -252,6 +262,11 @@ IF HACK_USE_HM_FROM_OVERWORLD_DEBUG == 0
 	ld b,STRENGTH
 	call checkWhoHasMove
 	jr nc, .done ;nobody knows Strength.
+ELSE
+	ld a,"?" ;clear the string buffer to avoid printing garbage.
+	ld [wcd6d],a
+	ld a,$50
+	ld [wcd6d+1],a
 ENDC
 	
 	;ask if we want to use it.
