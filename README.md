@@ -10,8 +10,10 @@ Current enhancements available:
 * Allow more precise control over text delay (0 to 7 frames per letter, with
   option to make 0 the default)
 * Disable low health alarm, or make it beep only a few times and then stop
-* Improvements to battle screen (more info about selected move, show "caught"
-  indicator, etc)
+* Improvements to battle screen:
+  * Show selected move's type, power, accuracy and PP
+  * Show an indicator on the enemy HUD when you've already caught that species
+  * Show status (PSN/SLP/etc) next to level instead of replacing it
 * Allow checking your Pokémon's stats from the "choose a Pokémon" menu in battle
   at all times (normally this option isn't shown if choosing a Pokémon after
   yours or an opponent's has fainted)
