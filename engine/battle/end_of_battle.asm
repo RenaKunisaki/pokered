@@ -47,6 +47,9 @@ EndOfBattle: ; 137aa (4:77aa)
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm
 	ld [wc02a], a
+IF HACK_LOW_HEALTH_ALARM == 2
+	ld [wLowHealthAlarmCount],a ;allow alarm to be turned back on
+ENDC
 	ld [W_ISINBATTLE], a
 	ld [W_BATTLETYPE], a
 	ld [W_MOVEMISSED], a
