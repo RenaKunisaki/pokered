@@ -2975,7 +2975,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $5
 	call AddNTimes
-	ld de, wd033
+	ld de, wTrainerPicPointer
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -2989,7 +2989,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld [de], a
 	jp BankswitchBack
 .linkBattle
-	ld hl, wd033
+	ld hl, wTrainerPicPointer
 	ld de, RedPicFront
 	ld [hl], e
 	inc hl
@@ -3998,7 +3998,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
-	ld [W_SUBANIMTRANSFORM],a ; counter for pokemon shaking animation
+	ld [wPartyMonAnimCounter],a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
 .loop2

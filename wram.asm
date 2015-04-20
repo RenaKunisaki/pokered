@@ -351,6 +351,10 @@ wNPCMovementScriptBank:: ; cc58
 	ds 2
 
 wHallOfFame:: ; cc5b
+wBoostExpByExpAll:: ; cc5b
+wAnimationType:: ; cc5b
+; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
+
 wcc5b:: ds 1
 wcc5c:: ds 1
 wcc5d:: ds 1
@@ -377,7 +381,11 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 
 wccd3:: ds 1
 wccd4:: ds 1
-wccd5:: ds 2
+
+; if [ccd5] != 1, the second AI layer is not applied
+wAILayer2Encouragement:: ; ccd5
+	ds 1
+	ds 1
 
 ; current HP of player and enemy substitutes
 wPlayerSubstituteHP:: ; ccd7
@@ -424,16 +432,22 @@ wSafariBaitFactor:: ; cce9
 
 wcceb:: ds 1
 wccec:: ds 1
-wcced:: ds 1
-wccee:: ds 1
-wccef:: ds 1
-wccf0:: ds 1
-wPlayerUsedMove:: ds 1
-wEnemyUsedMove:: ds 1
-wccf3:: ds 1
-wccf4:: ds 1
 
-wPartyFoughtCurrentEnemyFlags::
+wMonIsDisobedient:: ds 1 ; cced
+
+wPlayerDisabledMoveNumber:: ds 1 ; ccee 
+wEnemyDisabledMoveNumber:: ds 1 ; ccef
+
+wccf0:: ds 1
+
+wPlayerUsedMove:: ds 1 ; ccf1
+wEnemyUsedMove:: ds 1 ; ccf2
+
+wccf3:: ds 1
+
+wMoveDidntMiss:: ds 1 ; ccf4
+
+wPartyFoughtCurrentEnemyFlags:: ; ccf5
 ; flags that indicate which party members have fought the current enemy mon
 	flag_array 6
 
@@ -658,9 +672,17 @@ wTradedEnemyMonOTID:: ; cd59
 
 wcd5b:: ds 1
 wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
+
+wMonPartySpriteSpecies:: ; cd5d
+	ds 1
+
+wLeftGBMonSpecies:: ; cd5e
+; in the trade animation, the mon that leaves the left gameboy
+	ds 1
+
+wRightGBMonSpecies:: ; cd5f
+; in the trade animation, the mon that leaves the right gameboy
+	ds 1
 
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
@@ -775,7 +797,9 @@ wcf30:: ds 7
 wcf37:: ds 20
 wcf4b:: ds 1
 wcf4c:: ds 1
-wcf4d:: ds 18
+wGainBoostedExp:: ; cf4d
+    ds 1
+	ds 17
 
 wGymCityName:: ; cf5f
 wStringBuffer1:: ; cf5f
@@ -925,8 +949,9 @@ W_TRAINERCLASS:: ; d031
 
 	ds 1
 
-wd033:: ds 1
-wd034:: ds 2
+wTrainerPicPointer:: ; wd033
+	ds 2
+	ds 1
 wd036:: ds 16
 wd046:: ds 1
 wd047:: ds 1
@@ -959,7 +984,14 @@ W_BATTLETYPE:: ; d05a
 ; in safari battle, this is 2
 	ds 1
 
-wd05b:: ds 1
+wDamageMultipliers:: ; d05b
+; bits 0-6: Effectiveness
+   ;  $0 = immune
+   ;  $5 = not very effective
+   ;  $a = neutral
+   ; $14 = super-effective
+; bit 7: STAB
+    ds 1
 
 W_LONEATTACKNO:: ; d05c
 ; which entry in LoneAttacks to use
@@ -1041,11 +1073,13 @@ W_PLAYERCONFUSEDCOUNTER:: ; wd06b
 W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
 W_PLAYERDISABLEDMOVE:: ; d06d
+; high nibble: which move is disabled (1-4)
+; low nibble: disable turns left
 	ds 1
 
 	ds 1
 
-wEnemyNumAttacksLeft::
+wEnemyNumAttacksLeft:: ; d06f
 ; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
@@ -1055,6 +1089,8 @@ W_ENEMYCONFUSEDCOUNTER:: ; wd070
 W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
 W_ENEMYDISABLEDMOVE:: ; d072
+; high nibble: which move is disabled (1-4)
+; low nibble: disable turns left
 	ds 1
 
 	ds 1
@@ -1068,15 +1104,16 @@ wPlayerBideAccumulatedDamage:: ; d074
 wUnknownSerialCounter2:: ; d075
 ; 2 bytes
 
-ds 4
+	ds 4
 
 wEscapedFromBattle::
 ; non-zero when an item or move that allows escape from battle was used
 	ds 1
 
-wd079:: ds 1
+wd079:: 
+wAmountMoneyWon:: ds 1 ; wd079 - wd07b
 wd07a:: ds 1
-wd07b:: ds 1
+	ds 1
 
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
@@ -1114,9 +1151,14 @@ W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
 
+wTradedMonMovingRight:: ; d08a
+; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
+
 wd08a:: ds 1
 
 wTownMapSpriteBlinkingCounter:: ; d08b
+
+wPartyMonAnimCounter:: ; d08b
 
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
