@@ -33,6 +33,13 @@ Planned enhancements:
 These patches can be toggled on/off by editing `hacks.asm`. With all patches
 disabled, the ROM builds identical to the original.
 
+# Screenshots
+
+![enhanced-battle-screen.png](hacks/screenshots/enhanced-battle-screen.png?raw=true "Enhanced battle screen")
+![debug-menu.png](hacks/screenshots/debug-menu.png?raw=true "New debug menu")
+![enhanced-mart.png](hacks/screenshots/enhanced-mart.png?raw=true "Enhanced shop menu")
+![options-text-speed.png](hacks/screenshots/options-text-speed.png?raw=true "Text speed options")
+
 Original readme follows...
 
 
